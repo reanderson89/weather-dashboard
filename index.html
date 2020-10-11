@@ -11,7 +11,48 @@
         <link rel="stylesheet" href="assets/style.css">
     </head>
     <body>
-        <header>Weather Dashboard</header>
+        <header class="text-center">Weather Dashboard</header>
+
+        <main class="container">
+            <section class="row">
+                <section class="col-sm-4">
+                    <form class="form-group">
+                        <label>Enter City Name </label>
+                        <input type="text" id="user-city" placeholder="City" />
+                        <button
+                          type="button submit"
+                          id="submit-me"
+                          class="btn btn-info btn-sm submitBtn"
+                        >
+                          Submit
+                        </button>
+                      </form>
+                      <section class="row">
+                      <section class ="col-sm-12"id="new-city"></section>
+                    </section>
+                </section>
+                <section class="col-sm-8">
+                    <h1 id="city-name"></h1>
+                    <p id="temperature">Temperature: </p>
+                    <p id="humidity">Humidity: </p>
+                    <p id="wind-speed">Wind Speed: </p>
+                    <p id="uv-index">UV Index: </p>
+                
+                <section class="row">
+                    <div class="col-sm-12">
+                        <h3>Five Day Forecast: </h3>
+                    </div>
+                        <section class="row" id="five-day">
+                           
+                        </section>
+                    
+                </section>
+                </section>
+            </section>
+        </main>
+        
+
+
         
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
