@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 var userInputCity = document.getElementById("user-city")
 
-console.log(moment().add(1, 'days').format("L"));
+
 var savedCities = JSON.parse(localStorage.getItem("history")) || [];
 var city = "" || savedCities[0];
 getWeather(city);
@@ -10,20 +10,20 @@ getWeather(city);
 function getWeather(city){
     // var city = userInputCity.value;
     var apiKey = "07fc03bb700aad88a938de39fb56c70a"
-    var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey+"&units=imperial";
-    console.log(city);
+    var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units=imperial";
+    
 
 
     $.ajax({
         url: queryUrl,
         method: "GET"
     }).then(function(response){
-        console.log(response);
-       $("#city-name").text(""+response.city.name+" "+moment().format("L")).append($('<img class="images" src ="https://openweathermap.org/img/wn/' + response.list[0].weather[0].icon + '@2x.png"/>'));
-       $("#temperature").text("Temperature: "+Math.ceil(response.list[0].main.temp)+"°");
-       $("#humidity").text("Humidity: "+response.list[0].main.humidity+"%");
-       $("#wind-speed").text("Wind Speed: "+response.list[0].wind.speed+" mph");
-        getUV(response.city.coord.lat, response.city.coord.lon);
+        
+       $("#city-name").text(""+response.name+" "+moment().format("L")).append($('<img class="images" src ="https://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png"/>'));
+       $("#temperature").text("Temperature: "+Math.ceil(response.main.temp)+"°");
+       $("#humidity").text("Humidity: "+response.main.humidity+"%");
+       $("#wind-speed").text("Wind Speed: "+response.wind.speed+" mph");
+        getUV(response.coord.lat, response.coord.lon);
         
     })
     
@@ -32,12 +32,12 @@ function getWeather(city){
 function getUV(lat, lon){
     var apiKey = "07fc03bb700aad88a938de39fb56c70a"
     var queryUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&units=imperial&appid="+apiKey+"";
-    console.log(lat, lon);
+    
     $.ajax({
         url: queryUrl,
         method: "GET"
     }).then(function(response){
-        console.log(response);
+        
            $("#uv-index").text("UV Index: "+response.current.uvi);
            fiveDay(response);
     })
@@ -59,13 +59,13 @@ function prependCities(city){
     }
 }
 function fiveDay(response){
-    console.log(response);
+    
     $("#five-day").empty();
    for (var i = 1; i < 6;i++){
 
     var day = response.daily[i];
     var newDate = moment().add(i, 'days').format("L");
-    console.log(newDate)
+   
     var newCard = $('<div class="card text-white bg-info m-1" style="max-width: 18rem;"></div>'
     );
     newCard.append("<div class='card-header'>"+newDate+"</div>");
