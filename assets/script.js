@@ -21,21 +21,22 @@ function getWeather(){
        $("#humidity").text("Humidity: "+response.list[0].main.humidity+"%");
        $("#wind-speed").text("Wind Speed: "+response.list[0].wind.speed+" mph");
         getUV(response.city.coord.lat, response.city.coord.lon);
+        
     })
     prependCities();
-    fiveDay();
-
+    userInputCity.value="";
 }
 function getUV(lat, lon){
     var apiKey = "07fc03bb700aad88a938de39fb56c70a"
-    var queryUrl = "http://api.openweathermap.org/data/2.5/uvi?lat="+lat+"&lon="+lon+"&appid="+apiKey+"";
+    var queryUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+lat+"&lon="+lon+"&units=imperial&appid="+apiKey+"";
     console.log(lat, lon);
     $.ajax({
         url: queryUrl,
         method: "GET"
     }).then(function(response){
         console.log(response);
-           $("#uv-index").text("UV Index: "+response.value);
+           $("#uv-index").text("UV Index: "+response.current.uvi);
+           fiveDay(response);
     })
     
 }
@@ -50,13 +51,18 @@ function prependCities(){
          $("#new-city").prepend(newDiv);
     }
 }
-function fiveDay(){
-   for (var i = 0; i < 5;i++){
-    
+function fiveDay(response){
+    console.log(response);
+    $("#five-day").empty();
+   for (var i = 1; i < 6;i++){
+
+    var day = response.daily[i];
+    var myDate = new Date( day.dt *1000);
+    console.log(myDate)
     var newCard = $('<div class="card text-white bg-info m-1" style="max-width: 18rem;"></div>'
     );
-    newCard.append("<div class='card-header'>Header</div>");
-    newCard.append('<div class="card-body"></div>').append('<h5 class="card-title">Info card title</h5>').append('<p class="card-text">Temp</p>')
+    newCard.append("<div class='card-header'>"+myDate+"</div>");
+    newCard.append('<div class="card-body"></div>').append('<h5 class="card-title">'+"Temperature: "+day.temp.day+"°"+'</h5>').append('<p class="card-text">'+"Humidity: "+day.humidity+"%"+'</p>')
     
     $("#five-day").append(newCard);
 }}
