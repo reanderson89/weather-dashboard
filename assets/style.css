@@ -1,8 +1,10 @@
+/* formatting for the header of the page */
 header {
-    background-color: grey;
+    background-color: rgb(82, 82, 82);
     color: white;
     font-size: xx-large;
 }
-.container{
+/* formatting for the body of the page */
+body {
     background-color: teal;
 }

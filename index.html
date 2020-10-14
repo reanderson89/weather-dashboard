@@ -11,14 +11,16 @@
         <link rel="stylesheet" href="assets/style.css">
     </head>
     <body>
+        <!-- header for the page -->
         <header class="text-center">Weather Dashboard</header>
 
         <main class="container">
             <section class="row">
+                <!-- Input field for cities -->
                 <section class="col-sm-4" id="city-list">
                     <form class="form-group">
                         <label>Enter City Name </label>
-                        <input type="text" id="user-city" placeholder="City" />
+                        <input type="text" id="user-city" placeholder="City">
                         <button
                           type="button submit"
                           id="submit-me"
@@ -29,7 +31,7 @@
                         
                       </form>
                       <section class="row">
-                      <section class ="col-sm-12"id="new-city"></section>
+                      <section class ="col-sm-12"id="new-city"> <!-- New city buttons go here--> </section>
                       <button
                           type="button submit"
                           id="clear-me"
@@ -39,13 +41,14 @@
                         </button>
                     </section>
                 </section>
+                <!-- Main display of current weather -->
                 <section class="col-sm-8" id="weather-info">
                     <h1 id="city-name"></h1>
                     <p id="temperature">Temperature: </p>
                     <p id="humidity">Humidity: </p>
                     <p id="wind-speed">Wind Speed: </p>
-                    <p id="uv-index">UV Index: </p>
-                
+                    <p id="uv-index">UV Index:<span id="uv-span"></span> </p>
+                <!-- section for the five day forecast -->
                 <section class="row">
                     <div class="col-sm-12">
                         <h3>Five Day Forecast: </h3>
