@@ -17,7 +17,7 @@ function getWeather(city){
     $.ajax({
         url: queryUrl,
         method: "GET"
-    }).then(function(response){
+    }).done(function(response){
         
        $("#city-name").text(""+response.name+" "+moment().format("L")).append($('<img class="images" src ="https://openweathermap.org/img/wn/' + response.weather[0].icon + '@2x.png"/>'));
        $("#temperature").text("Temperature: "+Math.ceil(response.main.temp)+"°");
@@ -25,6 +25,9 @@ function getWeather(city){
        $("#wind-speed").text("Wind Speed: "+response.wind.speed+" mph");
         getUV(response.coord.lat, response.coord.lon);
         
+    }).fail(function(){
+        console.log("Bad request, API");
+        return;
     })
     
     userInputCity.value="";
@@ -37,8 +40,9 @@ function getUV(lat, lon){
         url: queryUrl,
         method: "GET"
     }).then(function(response){
-        
-           $("#uv-index").text("UV Index: "+response.current.uvi);
+            var uvI = response.current.uvi;
+           $("#uv-index").text("UV Index: "+uvI);
+          
            fiveDay(response);
     })
     
@@ -53,7 +57,7 @@ function prependCities(city){
 
     for (var i = 0; i < cityArray.length; i++) {
         var newDiv = $("<div>");
-       newDiv.append($("<button type='button' class='btn btn-secondary m-1'>"+cityArray[i]+"</button>")
+       newDiv.append($("<button type='button' class='btn btn-primary m-1'>"+cityArray[i]+"</button>")
        );
          $("#new-city").prepend(newDiv);
     }
@@ -66,7 +70,7 @@ function fiveDay(response){
     var day = response.daily[i];
     var newDate = moment().add(i, 'days').format("L");
    
-    var newCard = $('<div class="card text-white bg-info m-1" style="max-width: 18rem;"></div>'
+    var newCard = $('<div class="card text-white bg-info ml-1" style="max-width: 18rem;"></div>'
     );
     newCard.append("<div class='card-header'>"+newDate+"</div>");
     newCard.append($('<img class="images" src ="https://openweathermap.org/img/wn/' + day.weather[0].icon + '@2x.png"/>'));
@@ -85,6 +89,13 @@ for (var i = 0; i < savedCities.length; i++){
 }
 }
 pageLoad();
+
+$("#clear-me").on("click", function(){
+    window.localStorage.clear();
+    location.reload();
+    return false;
+   
+})
 
 
 $("#submit-me").on("click", function(event){

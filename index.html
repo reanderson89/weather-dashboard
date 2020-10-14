@@ -15,7 +15,7 @@
 
         <main class="container">
             <section class="row">
-                <section class="col-sm-4">
+                <section class="col-sm-4" id="city-list">
                     <form class="form-group">
                         <label>Enter City Name </label>
                         <input type="text" id="user-city" placeholder="City" />
@@ -26,12 +26,20 @@
                         >
                           Submit
                         </button>
+                        
                       </form>
                       <section class="row">
                       <section class ="col-sm-12"id="new-city"></section>
+                      <button
+                          type="button submit"
+                          id="clear-me"
+                          class="btn btn-info btn-sm clearBtn ml-5"
+                        >
+                          Clear All Cities
+                        </button>
                     </section>
                 </section>
-                <section class="col-sm-8">
+                <section class="col-sm-8" id="weather-info">
                     <h1 id="city-name"></h1>
                     <p id="temperature">Temperature: </p>
                     <p id="humidity">Humidity: </p>

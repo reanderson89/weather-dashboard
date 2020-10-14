@@ -3,4 +3,6 @@ header {
     color: white;
     font-size: xx-large;
 }
-
+.container{
+    background-color: teal;
+}
